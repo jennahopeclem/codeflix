@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Project from "./pages/Project";
 import Splash from "./pages/Splash";
 import Profile from "./pages/Profile";
+import Signup from "./pages/Signup";
 
 // const client = new ApolloClient({
 //   uri: "/graphql",
@@ -23,6 +24,7 @@ function App() {
           <Route path="/project" element={<Project />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/splash" element={<Splash />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </Router>

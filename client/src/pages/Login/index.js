@@ -1,6 +1,55 @@
 import "./index.css";
+import React, { useState } from 'react';
+import { checkPassword, validateEmail } from '../../utils/api'
 
 function Login() {
+
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleInputChange = (e) => {
+    // Getting the value and name of the input which triggered the change
+    const { target } = e;
+    const inputType = target.name;
+    const inputValue = target.value;
+
+    // Based on the input type, we set the state of either email, username, and password
+    if (inputType === 'email') {
+      setEmail(inputValue);
+    } else if (inputType === 'userName') {
+      setUserName(inputValue);
+    } else {
+      setPassword(inputValue);
+    }
+  };
+
+  const handleFormSubmit = (e) => {
+    // Preventing the default behavior of the form submit (which is to refresh the page)
+    e.preventDefault();
+
+    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
+    if (!validateEmail(email) || !userName) {
+      setErrorMessage('Email or username is invalid');
+      // We want to exit out of this code block if something is wrong so that the user can correct it
+      return;
+      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+    }
+    if (!checkPassword(password)) {
+      setErrorMessage(
+        `Choose a more secure password for the account: ${userName}`
+      );
+      return;
+    }
+    alert(`Hello ${userName}`);
+
+    // If everything goes according to plan, we want to clear out the input after a successful registration.
+    setUserName('');
+    setPassword('');
+    setEmail('');
+  };
+
   return (
     <>
       
@@ -21,7 +70,7 @@ function Login() {
       <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
         <form>
           <div class="flex flex-row items-center justify-center lg:justify-start">
-            <p class="text-lg mb-0 mr-4" class="text-white" >Sign in with</p>
+            <p class="text-lg mb-0 mr-4" className="text-white" >Sign in with</p>
             <button
               type="button"
               data-mdb-ripple="true"
@@ -118,8 +167,8 @@ function Login() {
             <p class="text-sm font-semibold mt-2 pt-1 mb-0">
               Don't have an account?
               <a
-                href="#!"
-                class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
+                href="../signup/"
+                class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out" 
                 >Register</a>
             </p>
           </div>
