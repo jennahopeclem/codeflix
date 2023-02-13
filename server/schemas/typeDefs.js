@@ -1,7 +1,7 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 // REFERENCE: 21-MERN\01-Activities\28-Stu_Mini-Project\Main\server\schemas\typeDefs
-// 
+//
 
 // const typeDefs = gql`
 //   type Tech {
@@ -28,4 +28,4 @@ const { gql } = require('apollo-server-express');
 //   }
 // `;
 
-module.exports = typeDefs;
+// module.exports = typeDefs;
