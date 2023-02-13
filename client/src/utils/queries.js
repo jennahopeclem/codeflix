@@ -1,33 +1,43 @@
+import { gql } from "@apollo/client";
 
-// import { gql } from '@apollo/client';
+export const QUERY_PROJECT = gql`
+  query getProject($complete: Boolean) {
+    project(complete: false) {
+      name
+      looking_for {
+        is_looking
+        num_recruits
+        specialty
+      }
+    }
+  }
+`;
 
+export const QUERY_DEV = gql`
+  query getDev {
+    dev {
+      name
+      github
+      linkedin
+      email
+      profile_pic
+      about
+      specialty
+      endorsements
+    }
+  }
+`;
 
-// Exports to be used with useQuery() in components/pages
-
-// REFERENCE: 21-MERN\01-Activities\28-Stu_Mini-Project\Develop\client\src\utils\queries.js
-// ===================================================================
-// =============  BEGIN REFERENCE  ===========================================
-
-// export const QUERY_TECH = gql`
-//   query tech {
-//     tech {
-//       _id
-//       name
-//     }
-//   }
-// `;
-
-// export const QUERY_MATCHUPS = gql`
-//   query matchups($_id: String) {
-//     matchups(_id: $_id) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
-
-// ===================================================================
-// =============  END REFERENCE  ===========================================
+export const QUERY_COMPLETE = gql`
+  query getComplete($complete: Boolean) {
+    complete(complete: true) {
+      name
+      github
+      linkedin
+      email
+      about
+      specialty
+      endorsements
+    }
+  }
+`;
