@@ -1,9 +1,27 @@
 import "tw-elements";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Carousel = (group) => {
+const Carousel = () => {
+    const data = ["1", "2", "3"]
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const carouselInfinistScroll = () => {
+        if (currentIndex === data.length-1) {
+            return setCurrentIndex(0)
+        }
+        return setCurrentIndex(currentIndex+1)
+    }
+
+    useEffect(() => {
+        const interval = setInterval(() => {carouselInfinistScroll()}, 3000)
+        return() => clearInterval(interval)})
+
   return (
 <div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
+
+{ data.map((item, index) => {
+    return
+})}
+
   <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
     <button
       type="button"
