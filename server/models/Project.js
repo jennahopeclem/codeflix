@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+// schema for looking_for data
 const recruitmentSchema = new Schema({
     is_looking: {
         type: Boolean,
@@ -16,7 +17,7 @@ const recruitmentSchema = new Schema({
     }
 });
 
-
+// schema for projects
 const projectSchema = new Schema({
     name: {
       type: String,
