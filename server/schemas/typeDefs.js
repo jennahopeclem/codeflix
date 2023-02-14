@@ -3,29 +3,102 @@ const { gql } = require("apollo-server-express");
 // REFERENCE: 21-MERN\01-Activities\28-Stu_Mini-Project\Main\server\schemas\typeDefs
 //
 
-// const typeDefs = gql`
-//   type Tech {
-//     _id: ID!
+const typeDefs = gql`
+  type Endorsement {
+    user_id: ID!
+    specialty: String!
+    rating: Int!
+    body: String!
+  }
+
+  type User {
+    _id: ID!
+    name: String
+    github: String
+    linkedin: String
+    email: String
+    about: String
+    profile_pic: String
+    specialty: String
+    endorsements: [Endorsement]
+  }
+
+  type Recruitment {
+    is_looking: Boolean!
+    num_recruits: Int
+    specialty: String!
+    description: String
+  }
+
+  type Project {
+    name: String!
+    description: String
+    looking_for: [Recruitment]
+    users: [User]!
+    complete: Boolean
+  }
+
+  type Query {
+    allUsers: [User]!
+    user(userId: ID!): User
+    allProjects: [Project]!
+    project(id: ID!): Project
+    recruitments: [Recruitment]!
+    recruitment(id: ID!): Recruitment
+    endorsements: [Endorsement]
+    endorsement(id: ID!): Endorsement
+  }
+
+  type Mutation {
+    createUser(name: String!, github: String, linkedin: String, email: String!, about: String, profile_pic: String, specialty: String): User!
+    updateUser(userId: ID!, name: String, github: String, linkedin: String, email: String, about: String, profile_pic: String, specialty: String): User!
+    deleteUser(userId: ID!): User!
+
+    createProject(name: String!, description: String, complete: Boolean): Project!
+    updateProject(id: ID!, name: String!, description: String, complete: Boolean): Project!
+    deleteProject(id: ID!): ID!
+
+    createRecruitment(is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
+    updateRecruitment(id: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
+    deleteRecruitment(id: ID!): ID!
+
+    createEndorsement(user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
+    updateEndorsement(id: ID!, user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
+    deleteEndorsement(id: ID!): ID!
+
+  }
+`;
+
+module.exports = typeDefs;
+
+// cant get inputs types to work
+//
+// endorsements and reactions should be pushed into the array on creation
+// input EndorsementInput {
+//     specialty: String!
+//     rating: Int!
+//     body: String!
+//   }
+//   input UserInput {
+//     name: String
+//     github: String
+//     linkedin: String
+//     email: String
+//     about: String
+//     profile_pic: String
+//     specialty: String
+//     endorsements: [EndorsementInput]
+//   }
+//   input RecruitmentInput {
+//     is_looking: Boolean!
+//     num_recruits: Int
+//     specialty: String!
+//     description: String
+//   }
+//   input ProjectInput {
 //     name: String!
+//     description: String
+//     looking_for: [RecruitmentInput]
+//     users: [UserInput]!
+//     complete: Boolean
 //   }
-
-//   type Matchup {
-//     _id: ID!
-//     tech1: String!
-//     tech2: String!
-//     tech1_votes: Int
-//     tech2_votes: Int
-//   }
-
-//   type Query {
-//     tech: [Tech]
-//     matchups(_id: String): [Matchup]
-//   }
-
-//   type Mutation {
-//     createMatchup(tech1: String!, tech2: String!): Matchup
-//     createVote(_id: String!, techNum: Int!): Matchup
-//   }
-// `;
-
-// module.exports = typeDefs;

@@ -23,7 +23,7 @@ const userSchema = new Schema({
         max_length: 500,
     },
     profile_pic: {
-      type: URL,
+      type: String,
       // default: this will be a default avatar
     },
     specialty: {

@@ -1,10 +1,18 @@
 import "./index.css";
+import { useState } from 'react';
 
 function Signup() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmP, setConfirmP] = useState('');
+
+    console.log('name: ', name, 'email: ', email, 'password: ', password, 'confirm password: ', confirmP);
+
+
   return (
-    <>
-      
-      
+    <>    
 <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
@@ -13,24 +21,32 @@ function Signup() {
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="fullname"
-                        placeholder="Full Name" />
+                        placeholder="Full Name" 
+                        value={ name }
+                        onChange={(e) => setName(e.target.value)}/>
 
                     <input 
                         type="text"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
-                        placeholder="Email" />
+                        placeholder="Email" 
+                        value={ email }
+                        onChange={(e) => setEmail(e.target.value)}/>
 
                     <input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
-                        placeholder="Password" />
+                        placeholder="Password" 
+                        value={ password }
+                        onChange={(e) => setPassword(e.target.value)}/>
                     <input 
                         type="password"
                         class="block border border-grey-light w-full p-3 rounded mb-4"
                         name="confirm_password"
-                        placeholder="Confirm Password" />
+                        placeholder="Confirm Password" 
+                        value={ confirmP }
+                        onChange={(e) => setConfirmP(e.target.value)}/>
 
                     <button
                         type="submit"
