@@ -1,103 +1,87 @@
+import React, { useEffect, useState } from "react";
 import "tw-elements";
-import React, { useEffect, useState } from 'react';
+import "./Carousel.css";
 
-const Carousel = () => {
-    const data = ["1", "2", "3"]
-    const [currentIndex, setCurrentIndex] = useState(0)
-    const carouselInfinistScroll = () => {
-        if (currentIndex === data.length-1) {
-            return setCurrentIndex(0)
-        }
-        return setCurrentIndex(currentIndex+1)
+export const CarouselItem = ({ children, width }) => {
+  return (
+    <div className="carousel-item" style={{ width: width }}>
+      {children}
+    </div>
+  );
+};
+
+const Carousel = ({ children }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const updateIndex = (newIndex) => {
+    if (newIndex < 0) {
+      //creates infinite carousel
+      newIndex = React.Children.count(children) - 1;
+    } else if (newIndex >= React.Children.count(children)) {
+      newIndex = 0;
     }
 
-    useEffect(() => {
-        const interval = setInterval(() => {carouselInfinistScroll()}, 3000)
-        return() => clearInterval(interval)})
+    setActiveIndex(newIndex);
+  };
+  // useEffect hook to init interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!paused) {
+        updateIndex(activeIndex + 1);
+      }
+    }, 5000);
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  });
 
   return (
-<div id="carouselExampleCaptions" class="carousel slide relative" data-bs-ride="carousel">
-
-{ data.map((item, index) => {
-    return
-})}
-
-  <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="0"
-      class="active"
-      aria-current="true"
-      aria-label="Slide 1"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="1"
-      aria-label="Slide 2"
-    ></button>
-    <button
-      type="button"
-      data-bs-target="#carouselExampleCaptions"
-      data-bs-slide-to="2"
-      aria-label="Slide 3"
-    ></button>
-  </div>
-  <div class="carousel-inner relative w-full overflow-hidden">
-    <div class="carousel-item active relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+    <div
+      className="carousel"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div
+        className="inner"
+        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+      >
+        {React.Children.map(children, (child, index) => {
+          return React.cloneElement(child, { width: "100%" });
+        })}
+      </div>
+      <div className="indicators">
+        <button
+          onClick={() => {
+            updateIndex(activeIndex - 1);
+          }}
+        >
+          Prev
+        </button>
+        {React.Children.map(children, (child, index) => {
+          return (
+            <button
+              className={`${index === activeIndex ? "active" : ""}`}
+              onClick={() => {
+                updateIndex(index);
+              }}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
+        <button
+          onClick={() => {
+            updateIndex(activeIndex + 1);
+          }}
+        >
+          Next
+        </button>
       </div>
     </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item relative float-left w-full">
-      <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
-        class="block w-full"
-        alt="..."
-      />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button
-    class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
-    type="button"
-    data-bs-target="#carouselExampleCaptions"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
-    type="button"
-    data-bs-target="#carouselExampleCaptions"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
   );
 };
 
