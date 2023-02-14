@@ -4,9 +4,7 @@ import Carousel, { CarouselItem } from "../../components/displays/carousel";
 // import { QUERY_PROJECT, QUERY_DEV, QUERY_COMPLETE } from "../../utils/queries";
 
 
-
 function Home() {
-
   // const { loading, data } = useQuery(QUERY_PROJECT, {
   //   fetchPolicy: "no-cache",
   // });
@@ -23,29 +21,19 @@ function Home() {
   //   fetchPolicy: "no-cache",
   // });
 
-const mockData = [
-  {
-    name: "Codeflix Project"
-  }
-]
-
-    return (
-      <div className="App">
-        <Carousel>
-        data.map((mockData) => {
-          <CarouselItem>{mockData.name}
-        })
-          
+  return (
+    <div className="App">
+      <Carousel>
+        <CarouselItem>
         
-          </CarouselItem>
-          <CarouselItem>Item 2</CarouselItem>
-          <CarouselItem>Item 3</CarouselItem>
-        </Carousel>
-      </div>
-    );
-  }
 
-  
+        {mockData[0].name}</CarouselItem>
+        <CarouselItem card="">{mockData[1].name}</CarouselItem>
+        <CarouselItem>{mockData[2].name}</CarouselItem>
+      </Carousel>
+    </div>
+  );
+}
 
 //   return (
 //     <>
