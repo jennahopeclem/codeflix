@@ -1,25 +1,27 @@
 const { Project, User } = require('../models');
 
 const resolvers = {
-
-// ref from 21-MERN\01-Activities\28-Stu_Mini-Project\Main\server\schemas\resolvers.js
-
   Query: {
+    
     allUsers: async () => {
-      return User.find({});
-    },
-    allProjects: async () => {
-        return Project.find({});
+      return User.find({}).populate('endorsements');
     },
     user: async (parent, { userId }) => {
-       return User.findOne({ _id: userId});
+       return User.findOne({ _id: userId}).populate('endorsements');
     },
-    project: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Project.find(params);
+    allProjects: async () => {
+        return Project.find({}).populate('looking_for');
     },
+    project: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId }).populate('looking_for');
+    },
+    allRecruitments: async () => {
+        return Project.find({$unwind: "looking_for"});
+    }
   },
   Mutation: {
+// ======================================================
+// ================ Begin User Mutations ================
     createUser: async (parent, args) => {
       const newUser = await User.create(args);
       return newUser;
@@ -42,12 +44,33 @@ const resolvers = {
         return await User.findOneAndDelete({ _id: userId });
       },
 
+// ======================================================
+// =============== End User Mutations ===================
+// ======================================================
+// ============= Begin Project Mutations ================
+
     createProject: async (parent, args) => {
       const newProject = await Project.create(args);
       return newProject;
     },
 
+    updateProject: async (parent, args) => {
+        const updateProject = await Project.findOneAndUpdate(
+        { _id: args.projectId },
+        { $set: args },
+        { new: true }
+      );
+        if (!updateProject) {
+            throw new Error('Project with this ID not found.')
+        }
+        return updateProject;
+    },
 
+    deleteProject: async (parent, { projectId }) => {
+        return await Project.findOneAndDelete({ _id: projectId });
+      },
+// ======================================================
+// =============== End Project Mutations ================
   },
 };
 

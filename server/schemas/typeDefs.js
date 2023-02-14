@@ -31,6 +31,7 @@ const typeDefs = gql`
   }
 
   type Project {
+    _id: ID!
     name: String!
     description: String
     looking_for: [Recruitment]
@@ -42,11 +43,11 @@ const typeDefs = gql`
     allUsers: [User]!
     user(userId: ID!): User
     allProjects: [Project]!
-    project(id: ID!): Project
-    recruitments: [Recruitment]!
-    recruitment(id: ID!): Recruitment
-    endorsements: [Endorsement]
-    endorsement(id: ID!): Endorsement
+    project(projectId: ID!): Project
+    allRecruitments: [Recruitment]!
+    recruitment(recruitmentId: ID!): Recruitment
+    allEndorsements: [Endorsement]
+    endorsement(endorsementId: ID!): Endorsement
   }
 
   type Mutation {
@@ -55,16 +56,16 @@ const typeDefs = gql`
     deleteUser(userId: ID!): User!
 
     createProject(name: String!, description: String, complete: Boolean): Project!
-    updateProject(id: ID!, name: String!, description: String, complete: Boolean): Project!
-    deleteProject(id: ID!): ID!
+    updateProject(projectId: ID!, name: String!, description: String, complete: Boolean): Project!
+    deleteProject(projectId: ID!): Project!
 
     createRecruitment(is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
     updateRecruitment(id: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
-    deleteRecruitment(id: ID!): ID!
+    deleteRecruitment(id: ID!): Recruitment!
 
     createEndorsement(user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
     updateEndorsement(id: ID!, user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
-    deleteEndorsement(id: ID!): ID!
+    deleteEndorsement(id: ID!): Endorsement!
 
   }
 `;
