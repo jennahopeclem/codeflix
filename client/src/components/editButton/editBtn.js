@@ -23,3 +23,9 @@ export default EditBtn;
 // function toggleEditMode() {
 //     setEditMode(!editMode);
 // };
+
+// and submit is:
+//  function submitData() {
+//     console.log('we have submitted the data!');
+//     setEditMode(!editMode);
+//   };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AboutMeForm() {
+function AboutMeForm({onClick}) {
     
     return (
         <div className="flex justify-center">
@@ -57,6 +57,7 @@ function AboutMeForm() {
                 id="aboutMe"
                 rows="5"
                 ></textarea>
+                <button onClick={onClick}>Submit changes</button>
             </div>
             </div>
         </div>

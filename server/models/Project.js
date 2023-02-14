@@ -14,6 +14,11 @@ const recruitmentSchema = new Schema({
         type: String,
         required: true,
         default: 'Any'
+    },
+    description: {
+      type: String,
+      required: false,
+      default: ''
     }
 });
 
