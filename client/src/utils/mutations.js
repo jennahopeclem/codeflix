@@ -9,15 +9,13 @@ import { gql } from '@apollo/client';
 // ===================================================================
 // =============  BEGIN REFERENCE  ===========================================
 
-// export const CREATE_MATCHUP = gql`
-//   mutation createMatchup($tech1: String!, $tech2: String!) {
-//     createMatchup(tech1: $tech1, tech2: $tech2) {
-//       _id
-//       tech1
-//       tech2
-//     }
-//   }
-// `;
+export const CREATE_USER = gql`
+mutation createUser($userId: ID!) {
+    deleteUser(userId: $userId) {
+      _id
+    }
+  }
+`;
 
 // export const CREATE_VOTE = gql`
 //   mutation createVote($_id: String!, $techNum: Int!) {

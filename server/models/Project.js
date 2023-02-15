@@ -32,7 +32,7 @@ const projectSchema = new Schema({
     description: {
       type: String
     },
-    looking_for: {recruitmentSchema},
+    looking_for: [recruitmentSchema],
     users: [{                          // because we are referencing other schemas, we need to use .populate() method when finding looking_for and users
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -41,9 +41,14 @@ const projectSchema = new Schema({
     complete: {
         type: Boolean,
         required: true,
+    },
+    thumbnail: {
+      type: String,
+      required: false,
+      default: '' // this will be a default thumbnail
     }
   });
 
   const Project = model('Project', projectSchema);
   
-  module.exports = Project;
+  module.exports = Project, recruitmentSchema;
