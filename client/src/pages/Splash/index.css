@@ -13,5 +13,13 @@
     background-color: black;
     text-align: center;
     line-height: 90vh;
+    animation: Splash-fade-out ease-out 4s;
+}
+
+@keyframes Splash-fade-out {
+    0%    { opacity: 1; }
+  20%   { opacity: 1; }
+  80%   { opacity:0 }
+  100%  { opacity: 0 }
 }
 
