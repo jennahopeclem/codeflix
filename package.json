@@ -16,6 +16,6 @@
         "concurrently": "^5.3.0"
     },
     "dependencies": {
-        "framer-motion": "^9.0.2"
+        "tw-elements": "^1.0.0-alpha13"
     }
 }

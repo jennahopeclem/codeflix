@@ -57,10 +57,10 @@ function Signup() {
                     >Create Account</button>
 
                     <div class="text-center text-sm text-grey-dark mt-4">
-                        By signing up, you agree to the 
+                        By signing up, you agree to the <br></br>
                         <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
                             Terms of Service
-                        </a> and 
+                        </a> and <br></br>
                         <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
                             Privacy Policy
                         </a>
