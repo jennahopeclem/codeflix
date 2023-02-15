@@ -1,10 +1,16 @@
 import "./index.css";
 
+
 function Splash() {
+
   return (
     <>
-      <div>This is Splash page</div>
-    </>
+    
+      
+      <div class="splash" >
+        
+      </div>
+      </>
   );
 }
 
