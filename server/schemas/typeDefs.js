@@ -1,8 +1,5 @@
 const { gql } = require("apollo-server-express");
 
-// REFERENCE: 21-MERN\01-Activities\28-Stu_Mini-Project\Main\server\schemas\typeDefs
-//
-
 const typeDefs = gql`
   type Endorsement {
     user_id: ID!
@@ -56,10 +53,10 @@ const typeDefs = gql`
     deleteUser(userId: ID!): User!
 
     createProject(name: String!, description: String, complete: Boolean): Project!
-    updateProject(projectId: ID!, name: String!, description: String, complete: Boolean): Project!
+    updateProject(projectId: ID!, name: String!, description: String, complete: Boolean, thumbnail: String): Project!
     deleteProject(projectId: ID!): Project!
 
-    createRecruitment(is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
+    createRecruitment(projectId: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
     updateRecruitment(id: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
     deleteRecruitment(id: ID!): Recruitment!
 

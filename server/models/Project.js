@@ -41,6 +41,11 @@ const projectSchema = new Schema({
     complete: {
         type: Boolean,
         required: true,
+    },
+    thumbnail: {
+      type: String,
+      required: false,
+      default: '' // this will be a default thumbnail
     }
   });
 

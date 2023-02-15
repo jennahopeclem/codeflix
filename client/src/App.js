@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Project from "./pages/Project";
@@ -8,14 +8,14 @@ import Splash from "./pages/Splash";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 
-// const client = new ApolloClient({
-//   uri: "/graphql",
-//   cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+  uri: "/graphql",
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
-    // <ApolloProvider client={client}>
+    <ApolloProvider client={client}>
     <Router>
       <div className="flex-column justify-center align-center min-100-vh bg-primary">
         <Routes>
@@ -28,7 +28,7 @@ function App() {
         </Routes>
       </div>
     </Router>
-    // </ApolloProvider>
+    </ApolloProvider>
   );
 }
 

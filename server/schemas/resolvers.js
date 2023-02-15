@@ -71,6 +71,32 @@ const resolvers = {
       },
 // ======================================================
 // =============== End Project Mutations ================
+// ======================================================
+// ============= Begin Recruitment Mutations ============
+  
+//   createRecruitment: async (parent, args) => {
+//     return await Project.findOne(
+//         { _id: args.projectId },
+//         {$push: {is_looking: {args}} },
+//         {new: true}
+//         );
+//   },
+
+//   updateProject: async (parent, args) => {
+//       const updateProject = await Project.findOneAndUpdate(
+//       { _id: args.projectId },
+//       { $set: args },
+//       { new: true }
+//     );
+//       if (!updateProject) {
+//           throw new Error('Project with this ID not found.')
+//       }
+//       return updateProject;
+//   },
+
+//   deleteProject: async (parent, { projectId }) => {
+//       return await Project.findOneAndDelete({ _id: projectId });
+//     },
   },
 };
 
