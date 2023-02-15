@@ -1,32 +1,103 @@
-const { Profile, User, Endorsement } = require('../models');
+const { Project, User } = require('../models');
 
 const resolvers = {
+  Query: {
+    
+    allUsers: async () => {
+      return User.find({}).populate('endorsements');
+    },
+    user: async (parent, { userId }) => {
+       return User.findOne({ _id: userId}).populate('endorsements');
+    },
+    allProjects: async () => {
+        return Project.find({}).populate('looking_for');
+    },
+    project: async (parent, { projectId }) => {
+      return Project.findOne({ _id: projectId }).populate('looking_for');
+    },
+    allRecruitments: async () => {
+        return Project.find({$unwind: "looking_for"});
+    }
+  },
+  Mutation: {
+// ======================================================
+// ================ Begin User Mutations ================
+    createUser: async (parent, args) => {
+      const newUser = await User.create(args);
+      return newUser;
+    },
 
-// ref from 21-MERN\01-Activities\28-Stu_Mini-Project\Main\server\schemas\resolvers.js
+    updateUser: async (parent, args) => {
 
-//   Query: {
-//     tech: async () => {
-//       return Tech.find({});
-//     },
-//     matchups: async (parent, { _id }) => {
-//       const params = _id ? { _id } : {};
-//       return Matchup.find(params);
-//     },
+        const updateUser = await User.findOneAndUpdate(
+        { _id: args.userId },
+        { $set: args },
+        { new: true }
+      );
+        if (!updateUser) {
+            throw new Error('User with this ID not found.')
+        }
+        return updateUser;
+    },
+
+    deleteUser: async (parent, { userId }) => {
+        return await User.findOneAndDelete({ _id: userId });
+      },
+
+// ======================================================
+// =============== End User Mutations ===================
+// ======================================================
+// ============= Begin Project Mutations ================
+
+    createProject: async (parent, args) => {
+      const newProject = await Project.create(args);
+      return newProject;
+    },
+
+    updateProject: async (parent, args) => {
+        const updateProject = await Project.findOneAndUpdate(
+        { _id: args.projectId },
+        { $set: args },
+        { new: true }
+      );
+        if (!updateProject) {
+            throw new Error('Project with this ID not found.')
+        }
+        return updateProject;
+    },
+
+    deleteProject: async (parent, { projectId }) => {
+        return await Project.findOneAndDelete({ _id: projectId });
+      },
+// ======================================================
+// =============== End Project Mutations ================
+// ======================================================
+// ============= Begin Recruitment Mutations ============
+  
+//   createRecruitment: async (parent, args) => {
+//     return await Project.findOne(
+//         { _id: args.projectId },
+//         {$push: {is_looking: {args}} },
+//         {new: true}
+//         );
 //   },
-//   Mutation: {
-//     createMatchup: async (parent, args) => {
-//       const matchup = await Matchup.create(args);
-//       return matchup;
-//     },
-//     createVote: async (parent, { _id, techNum }) => {
-//       const vote = await Matchup.findOneAndUpdate(
-//         { _id },
-//         { $inc: { [`tech${techNum}_votes`]: 1 } },
-//         { new: true }
-//       );
-//       return vote;
-//     },
+
+//   updateProject: async (parent, args) => {
+//       const updateProject = await Project.findOneAndUpdate(
+//       { _id: args.projectId },
+//       { $set: args },
+//       { new: true }
+//     );
+//       if (!updateProject) {
+//           throw new Error('Project with this ID not found.')
+//       }
+//       return updateProject;
 //   },
+
+//   deleteProject: async (parent, { projectId }) => {
+//       return await Project.findOneAndDelete({ _id: projectId });
+//     },
+  },
 };
 
 module.exports = resolvers;
