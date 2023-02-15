@@ -1,6 +1,7 @@
 import "./index.css";
 import React, { useState } from 'react';
 import { checkPassword, validateEmail } from '../../utils/api'
+import Nav from '../../components/utils/nav'
 
 function Login() {
 
@@ -52,6 +53,7 @@ function Login() {
 
   return (
     <>
+    <Nav></Nav>
       
       <section class="h-screen">
   <div class="px-6 h-full text-gray-800">

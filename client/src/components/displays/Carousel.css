@@ -8,7 +8,7 @@
 }
 
 .carousel-item {
-    display: inline-block;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #E50914;

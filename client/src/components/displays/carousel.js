@@ -10,7 +10,7 @@ export const CarouselItem = ({ children, width }) => {
   );
 };
 
-const Carousel = ({ children }) => {
+export const Carousel = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
@@ -84,5 +84,3 @@ const Carousel = ({ children }) => {
     </div>
   );
 };
-
-export default Carousel;

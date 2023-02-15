@@ -1,8 +1,7 @@
 import "./index.css";
-import Carousel, { CarouselItem } from "../../components/displays/carousel";
+import Nav from "../../components/utils/nav";
+import { Carousel, CarouselItem } from "../../components/displays/carousel";
 import Card from "../../components/displays/card";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_PROJECT, QUERY_DEV, QUERY_COMPLETE } from "../../utils/queries";
 
 function Home() {
   // const project = getProjectQuery()
@@ -11,14 +10,18 @@ function Home() {
     <>
       <div>
         <div>
-          <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
+          <h1 class="m-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
             Welcome to Codeflix
           </h1>
         </div>
         <div>
           <h3 class="text-center italic font-bold">Simple, yet signficant</h3>
           {/* maybe this can link to profile with an add project button */}
-          <h4 class="text-center">Start your project today</h4>
+          <h4 class="text-center">
+            Looking for a project to get started on? Need a developer? We got
+            you! Get started on your project ideas today.<br></br> Search for
+            projects, developers, and view final projects
+          </h4>
         </div>
       </div>
 
@@ -40,21 +43,21 @@ fetchPolicy: "no-cache",
 
       <div>
         <div className="h-screen">
-          <Carousel>
-            <CarouselItem className="flex flex-row">
-              <Card className="flex-nowrap" />
-              <Card className="flex-nowrap" />
-              <Card className="flex-nowrap" />
+          <Carousel className="carousel-item">
+            <CarouselItem>
+              <Card />
             </CarouselItem>
             <CarouselItem>
-              <Card className="" />
+              <Card />
             </CarouselItem>
             <CarouselItem>
-              <Card className="" />
+              <Card />
             </CarouselItem>
           </Carousel>
         </div>
       </div>
+      <div>This is Homepage</div>
+      <Nav></Nav>
     </>
   );
 }
