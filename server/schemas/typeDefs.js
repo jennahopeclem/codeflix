@@ -10,7 +10,7 @@ const typeDefs = gql`
 
   type User {
     _id: ID!
-    name: String
+    username: String
     github: String
     linkedin: String
     email: String
@@ -37,6 +37,11 @@ const typeDefs = gql`
     complete: Boolean
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     allUsers: [User]!
     user(userId: ID!): User
@@ -49,8 +54,13 @@ const typeDefs = gql`
   }
 
   type Mutation {
+    login(
+      email: String!,
+      password: String!
+      ): Auth
+
     createUser(
-      name: String!
+      username: String!
       github: String
       linkedin: String
       email: String!
@@ -58,18 +68,20 @@ const typeDefs = gql`
       about: String
       profile_pic: String
       specialty: String
-    ): User!
+    ): Auth
+
     updateUser(
       userId: ID!
-      name: String
+      username: String
       github: String
       linkedin: String
       email: String
       about: String
       profile_pic: String
       specialty: String
-    ): User!
-    deleteUser(userId: ID!): User!
+    ): Auth
+
+    deleteUser(userId: ID!): Auth
 
     createProject(
       name: String!
