@@ -4,7 +4,7 @@ import "./Carousel.css";
 
 export const CarouselItem = ({ children, width }) => {
   return (
-    <div className="carousel-item content-center" style={{ width: width }}>
+    <div className="carousel-item content-center flex flex-row w-full " >
       {children}
     </div>
   );
@@ -46,7 +46,7 @@ export const Carousel = ({ children }) => {
       onMouseLeave={() => setPaused(false)}
     >
       <div
-        className="inner"
+        className="inner flex flex-row "
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
         {React.Children.map(children, (child, index) => {
