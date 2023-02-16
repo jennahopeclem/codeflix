@@ -10,14 +10,14 @@ function Home() {
     <>
       <div>
         <div>
-          <h1 class="m-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
+          <h1 className="m-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
             Welcome to Codeflix
           </h1>
         </div>
         <div>
-          <h3 class="text-center italic font-bold">Simple, yet signficant</h3>
+          <h3 className="text-center italic font-bold">Simple, yet signficant</h3>
           {/* maybe this can link to profile with an add project button */}
-          <h4 class="text-center">
+          <h4 className="text-center">
             Looking for a project to get started on? Need a developer? We got
             you! Get started on your project ideas today.<br></br> Search for
             projects, developers, and view final projects
@@ -46,11 +46,7 @@ fetchPolicy: "no-cache",
           <Carousel className="carousel-item">
             <CarouselItem>
               <Card />
-            </CarouselItem>
-            <CarouselItem>
               <Card />
-            </CarouselItem>
-            <CarouselItem>
               <Card />
             </CarouselItem>
           </Carousel>
