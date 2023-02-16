@@ -59,14 +59,46 @@ const complete = useQuery(QUERY_COMPLETE, {
 fetchPolicy: "no-cache",
   });  */}
 
+{/* 
+            styling added to carousel component:
+                              in carousel.js(carouselItem):
+                                        'flex flex-row' added to div wrapped around {children}
+                              in carousel.js(carousel):
+                                        'flex flex-row' added to div with "inner" class
+                              in card.js
+                                        'mx-2' added to first div class
+*/}
       <div>
         <div className="h-screen">
           <Carousel className="carousel-item">
             <CarouselItem >
+              <Card />
+              <Card />
+              <Card />
             </CarouselItem>
             <CarouselItem >
+              <Card />
+              <Card />
+              <Card />
             </CarouselItem>
             <CarouselItem >
+              <Card />
+              <Card />
+              <Card />
+            </CarouselItem>
+          </Carousel>
+          <Carousel className="carousel-item">
+            <CarouselItem >
+              <Card />
+              <Card />
+              <Card />
+            </CarouselItem>
+          </Carousel>
+          <Carousel className="carousel-item">
+            <CarouselItem >
+              <Card />
+              <Card />
+              <Card />
             </CarouselItem>
           </Carousel>
         </div>

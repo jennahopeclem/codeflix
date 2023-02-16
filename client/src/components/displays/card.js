@@ -30,7 +30,7 @@ function Card() {
 
     <>
     {mockData.map((mockData) => (
-        <div key={mockData.id + 1} className="card max-w-sm w-full lg:max-w-full lg:flex">
+        <div key={mockData.id + 1} className="card max-w-sm w-full lg:max-w-full lg:flex mx-2">
 
             <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
             <div className="mb-8">
