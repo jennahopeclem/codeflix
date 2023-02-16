@@ -8,19 +8,19 @@ const mockData = [
     //   }
       //   alt: String,
     },
-    // {
-    //   name: "Project 2",
-    //   image: "/images/notetaker.png",
-    //   description: "String",
+    {
+      name: "Project 2",
+      image: "/images/notetaker.png",
+      description: "String",
 
-    // },
-    // {
-    //   name: "Final Project",
-    //   image: "/images/workday-planner.png",
-    //   description: "String",
-    // //   is_looking: {mockData},
+    },
+    {
+      name: "Final Project",
+      image: "/images/workday-planner.png",
+      description: "String",
+    //   is_looking: {mockData},
 
-    // },
+    },
   ];
 
 
@@ -29,8 +29,9 @@ function Card() {
   return (
 
     <>
+        <h1 className="text-2xl text-white font-semibold text-center">Projects looking for Developers</h1>
     {mockData.map((mockData) => (
-        <div className="card max-w-sm w-full lg:max-w-full lg:flex">
+        <div className="carousel max-w-sm w-full lg:max-w-full lg:flex">
             <img
             className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
             src={mockData.image}

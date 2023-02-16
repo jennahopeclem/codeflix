@@ -47,12 +47,6 @@ fetchPolicy: "no-cache",
             <CarouselItem>
               <Card />
             </CarouselItem>
-            <CarouselItem>
-              <Card />
-            </CarouselItem>
-            <CarouselItem>
-              <Card />
-            </CarouselItem>
           </Carousel>
         </div>
       </div>
