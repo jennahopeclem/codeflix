@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "tw-elements";
 import "./Carousel.css";
+import Card from "./card";
 
 export const CarouselItem = ({ children, width }) => {
   return (
-    <div className="carousel-item" style={{ width: width }}>
-      {children}
+    <div className="carousel-item content-center flex flex-row w-full " >
+              <Card />
+              <Card />
+              <Card />
     </div>
   );
 };
@@ -46,7 +49,7 @@ export const Carousel = ({ children }) => {
       onMouseLeave={() => setPaused(false)}
     >
       <div
-        className="inner"
+        className="inner flex flex-row "
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
       >
         {React.Children.map(children, (child, index) => {

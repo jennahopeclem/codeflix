@@ -2,6 +2,7 @@ body {
     background-image: linear-gradient(0deg, rgba(17,28,39,0.9584427521008403) 0%, rgba(133,26,34,1) 37%, rgba(229,9,20,0.9528405112044818) 95%);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     height: 100%;
     width: 100%;
 }
