@@ -1,4 +1,6 @@
 const { Project, User } = require('../models');
+const { signToken } = require('../utils/auth');
+const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
   Query: {
@@ -23,10 +25,27 @@ const resolvers = {
 // ======================================================
 // ================ Begin User Mutations ================
     createUser: async (parent, args) => {
-      const newUser = await User.create(args);
-      return newUser;
+      const user = await User.create(args);
+      const token = signToken(user);
+      return { token, user };
     },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
 
+      if (!user) {
+        throw new AuthenticationError('No user found with this email address');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if (!correctPw) {
+        throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+
+      return { token, user };
+    },
     updateUser: async (parent, args) => {
 
         const updateUser = await User.findOneAndUpdate(

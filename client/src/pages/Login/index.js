@@ -1,54 +1,45 @@
 import "./index.css";
 import React, { useState } from 'react';
-import { checkPassword, validateEmail } from '../../utils/api'
+// import { checkPassword, validateEmail } from '../../utils/api'
 import Nav from '../../components/utils/nav'
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
+import Auth from "../../utils/auth";
 
 function Login() {
 
-  const [email, setEmail] = useState('');
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
-  const handleInputChange = (e) => {
-    // Getting the value and name of the input which triggered the change
-    const { target } = e;
-    const inputType = target.name;
-    const inputValue = target.value;
+  // update state based on form input changes
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
 
-    // Based on the input type, we set the state of either email, username, and password
-    if (inputType === 'email') {
-      setEmail(inputValue);
-    } else if (inputType === 'userName') {
-      setUserName(inputValue);
-    } else {
-      setPassword(inputValue);
-    }
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
   };
 
-  const handleFormSubmit = (e) => {
-    // Preventing the default behavior of the form submit (which is to refresh the page)
-    e.preventDefault();
+  // submit form
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+    try {
+      const { data } = await login({
+        variables: { ...formState },
+      });
 
-    // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-    if (!validateEmail(email) || !userName) {
-      setErrorMessage('Email or username is invalid');
-      // We want to exit out of this code block if something is wrong so that the user can correct it
-      return;
-      // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+      Auth.login(data.login.token);
+    } catch (e) {
+      console.error(e);
     }
-    if (!checkPassword(password)) {
-      setErrorMessage(
-        `Choose a more secure password for the account: ${userName}`
-      );
-      return;
-    }
-    alert(`Hello ${userName}`);
 
-    // If everything goes according to plan, we want to clear out the input after a successful registration.
-    setUserName('');
-    setPassword('');
-    setEmail('');
+    // clear form values
+    setFormState({
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -72,7 +63,7 @@ function Login() {
       <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
         <form>
           <div className="flex flex-row items-center justify-center lg:justify-start">
-            <p className="text-lg mb-0 mr-4" className="text-white" >Sign in with</p>
+            <p className="text-lg mb-0 mr-4 text-white" >Sign in with</p>
             <button
               type="button"
               data-mdb-ripple="true"
@@ -131,10 +122,10 @@ function Login() {
           
           <div className="mb-6">
             <input
-            value={email}
+            value={formState.email}
               name="email"
               className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput2"
+              id="email"
               placeholder="Email address"
               onChange={handleInputChange}
             />
@@ -143,10 +134,10 @@ function Login() {
           
           <div className="mb-6">
             <input
-            value={password}
+            value={formState.password}
               type="password"
               className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              id="exampleFormControlInput2"
+              name="password"
               placeholder="Password"
               onChange={handleInputChange}
             />
@@ -158,7 +149,7 @@ function Login() {
                 type="checkbox"
                 className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                 id="exampleCheck2"/>
-              <label className="form-check-label inline-block text-gray-400" for="exampleCheck2"
+              <label className="form-check-label inline-block text-gray-400" htmlor="exampleCheck2"
                 >Remember me</label>
             </div>
             <a href="#!" className="text-gray-400">Forgot password?</a>
@@ -166,6 +157,7 @@ function Login() {
 
           <div className="text-center lg:text-left">
             <button
+              onSubmit={handleFormSubmit}
               type="button"
               className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" onClick={handleFormSubmit}>
               Login
@@ -179,11 +171,11 @@ function Login() {
             </p>
           </div>
         </form>
-        {errorMessage && (
-          <div>
-            <p className="error-text">{errorMessage}</p>
-          </div>
-        )}
+        {error && (
+              <div className="my-3 p-3 bg-danger text-white">
+                {error.message}
+              </div>
+            )}
       </div>
     </div>
   </div>
@@ -193,3 +185,48 @@ function Login() {
 }
 
 export default Login;
+  // const [email, setEmail] = useState('');
+  // const [userName, setUserName] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [errorMessage, setErrorMessage] = useState('');
+
+  // const handleInputChange = (e) => {
+  //   // Getting the value and name of the input which triggered the change
+  //   const { target } = e;
+  //   const inputType = target.name;
+  //   const inputValue = target.value;
+
+  //   // Based on the input type, we set the state of either email, username, and password
+  //   if (inputType === 'email') {
+  //     setEmail(inputValue);
+  //   } else if (inputType === 'userName') {
+  //     setUserName(inputValue);
+  //   } else {
+  //     setPassword(inputValue);
+  //   }
+  // };
+
+  // const handleFormSubmit = (e) => {
+  //   // Preventing the default behavior of the form submit (which is to refresh the page)
+  //   e.preventDefault();
+
+  //   // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
+  //   if (!validateEmail(email) || !userName) {
+  //     setErrorMessage('Email or username is invalid');
+  //     // We want to exit out of this code block if something is wrong so that the user can correct it
+  //     return;
+  //     // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
+  //   }
+  //   if (!checkPassword(password)) {
+  //     setErrorMessage(
+  //       `Choose a more secure password for the account: ${userName}`
+  //     );
+  //     return;
+  //   }
+  //   alert(`Hello ${userName}`);
+
+  //   // If everything goes according to plan, we want to clear out the input after a successful registration.
+  //   setUserName('');
+  //   setPassword('');
+  //   setEmail('');
+  // };

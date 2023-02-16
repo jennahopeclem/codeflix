@@ -55,9 +55,9 @@ function Signup() {
               <input
                 type="text"
                 className="block border border-grey-light w-full p-3 rounded mb-4"
-                name="fullname"
-                placeholder="Full Name"
-                value={formState.name}
+                name="username"
+                placeholder="username"
+                value={formState.username}
                 onChange={handleChange}
               />
               <input
@@ -87,6 +87,7 @@ function Signup() {
               /> */}
 
               <button
+                onSubmit={handleFormSubmit}
                 type="submit"
                 className="w-full text-center py-3 rounded bg-green text-black hover:bg-green-dark focus:outline my-1"
               >
