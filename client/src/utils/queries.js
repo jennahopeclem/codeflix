@@ -5,7 +5,7 @@ export const QUERY_ALL_USERS = gql`
   query findAllUsers {
   allUsers {
     _id
-    name
+    username
     github
     linkedin
     email
@@ -34,7 +34,7 @@ query findOneUser($userId: ID!) {
       }
       github
       linkedin
-      name
+      username
       profile_pic
       specialty
       _id
@@ -73,7 +73,7 @@ query findOneProject($projectId: ID!) {
         description
       }
       users {
-        name
+        username
         profile_pic
         specialty
       }
