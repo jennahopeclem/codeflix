@@ -31,13 +31,14 @@ function Card() {
     <>
     {mockData.map((mockData) => (
         <div key={mockData.id + 1} className="card max-w-sm w-full lg:max-w-full lg:flex">
-            <img
-            className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
-            src={mockData.image}
-            alt={mockData.alt}
-            />
+
             <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
             <div className="mb-8">
+              <img
+              className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden px-5"
+              src={mockData.image}
+              alt={mockData.alt}
+              />
                 <p className="text-sm text-gray-600 flex items-center">
                 Project Name: {mockData.name}
                 mock

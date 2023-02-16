@@ -2,9 +2,27 @@ import "./index.css";
 import Nav from "../../components/utils/nav";
 import { Carousel, CarouselItem } from "../../components/displays/carousel";
 import Card from "../../components/displays/card";
+import { QUERY_ALL_PROJECTS, QUERY_ALL_USERS } from "../../utils/queries";
+import { useState, useEffect } from "react";
 
 function Home() {
-  // const project = getProjectQuery()
+
+  // =================  QUERIES  ================================
+
+  // const carouselData = {
+  //   projects: useQuery(QUERY_ALL_PROJECTS, {  // add find incomplete projects
+  //     fetchPolicy: "no-cache"
+  //   }),
+  //   users: useQuery(QUERY_ALL_USERS, { // add find devs looking for work
+  //     fetchPolicy: "no-cache"
+  //   }),
+  //   completedProjects: useQuery(QUERY_ALL_PROJECTS, {  // add find complete projects
+  //     fetchPolicy: "no-cache"
+  //   })
+  // }
+
+  // =================  END QUERIES  ================================
+
 
   return (
     <>
@@ -44,10 +62,11 @@ fetchPolicy: "no-cache",
       <div>
         <div className="h-screen">
           <Carousel className="carousel-item">
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
+            <CarouselItem >
+            </CarouselItem>
+            <CarouselItem >
+            </CarouselItem>
+            <CarouselItem >
             </CarouselItem>
           </Carousel>
         </div>
