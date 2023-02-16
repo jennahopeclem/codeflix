@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "tw-elements";
 import "./Carousel.css";
+import Card from "./card";
 
 export const CarouselItem = ({ children, width }) => {
   return (
     <div className="carousel-item content-center flex flex-row w-full " >
-      {children}
+              <Card />
+              <Card />
+              <Card />
     </div>
   );
 };

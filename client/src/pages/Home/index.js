@@ -6,7 +6,6 @@ import { QUERY_ALL_PROJECTS, QUERY_ALL_USERS } from "../../utils/queries";
 import { useState, useEffect } from "react";
 
 function Home() {
-
   // =================  QUERIES  ================================
 
   // const carouselData = {
@@ -23,7 +22,6 @@ function Home() {
 
   // =================  END QUERIES  ================================
 
-
   return (
     <>
       <div>
@@ -33,7 +31,9 @@ function Home() {
           </h1>
         </div>
         <div>
-          <h3 className="text-center italic font-bold">Simple, yet signficant</h3>
+          <h3 className="text-center italic font-bold">
+            Simple, yet signficant
+          </h3>
           {/* maybe this can link to profile with an add project button */}
           <h4 className="text-center">
             Looking for a project to get started on? Need a developer? We got
@@ -59,7 +59,7 @@ const complete = useQuery(QUERY_COMPLETE, {
 fetchPolicy: "no-cache",
   });  */}
 
-{/* 
+      {/* 
             styling added to carousel component:
                               in carousel.js(carouselItem):
                                         'flex flex-row' added to div wrapped around {children}
@@ -71,31 +71,46 @@ fetchPolicy: "no-cache",
       <div>
         <div className="h-screen">
           <Carousel className="carousel-item">
-            <CarouselItem >
+            <CarouselItem>
+
+            </CarouselItem>
+            <CarouselItem>
+
+            </CarouselItem>
+            <CarouselItem>
+
+            </CarouselItem>
+          </Carousel>
+
+          <Carousel className="carousel-item">
+            <CarouselItem>
               <Card />
               <Card />
               <Card />
             </CarouselItem>
-            <CarouselItem >
+            <CarouselItem>
               <Card />
               <Card />
               <Card />
             </CarouselItem>
-            <CarouselItem >
+            <CarouselItem>
               <Card />
               <Card />
               <Card />
             </CarouselItem>
           </Carousel>
           <Carousel className="carousel-item">
-            <CarouselItem >
+            <CarouselItem>
               <Card />
               <Card />
               <Card />
             </CarouselItem>
-          </Carousel>
-          <Carousel className="carousel-item">
-            <CarouselItem >
+            <CarouselItem>
+              <Card />
+              <Card />
+              <Card />
+            </CarouselItem>
+            <CarouselItem>
               <Card />
               <Card />
               <Card />

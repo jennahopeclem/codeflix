@@ -14,6 +14,7 @@ const typeDefs = gql`
     github: String
     linkedin: String
     email: String
+    password: String
     about: String
     profile_pic: String
     specialty: String
@@ -48,22 +49,72 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(name: String!, github: String, linkedin: String, email: String!, about: String, profile_pic: String, specialty: String): User!
-    updateUser(userId: ID!, name: String, github: String, linkedin: String, email: String, about: String, profile_pic: String, specialty: String): User!
+    createUser(
+      name: String!
+      github: String
+      linkedin: String
+      email: String!
+      password: String!
+      about: String
+      profile_pic: String
+      specialty: String
+    ): User!
+    updateUser(
+      userId: ID!
+      name: String
+      github: String
+      linkedin: String
+      email: String
+      about: String
+      profile_pic: String
+      specialty: String
+    ): User!
     deleteUser(userId: ID!): User!
 
-    createProject(name: String!, description: String, complete: Boolean): Project!
-    updateProject(projectId: ID!, name: String!, description: String, complete: Boolean, thumbnail: String): Project!
+    createProject(
+      name: String!
+      description: String
+      complete: Boolean
+    ): Project!
+    updateProject(
+      projectId: ID!
+      name: String!
+      description: String
+      complete: Boolean
+      thumbnail: String
+    ): Project!
     deleteProject(projectId: ID!): Project!
 
-    createRecruitment(projectId: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
-    updateRecruitment(id: ID!, is_looking: Boolean!, num_recruits: Int, specialty: String!, description: String): Recruitment!
+    createRecruitment(
+      projectId: ID!
+      is_looking: Boolean!
+      num_recruits: Int
+      specialty: String!
+      description: String
+    ): Recruitment!
+    updateRecruitment(
+      id: ID!
+      is_looking: Boolean!
+      num_recruits: Int
+      specialty: String!
+      description: String
+    ): Recruitment!
     deleteRecruitment(id: ID!): Recruitment!
 
-    createEndorsement(user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
-    updateEndorsement(id: ID!, user_id: ID!, specialty: String!, rating: Int!, body: String!): Endorsement!
+    createEndorsement(
+      user_id: ID!
+      specialty: String!
+      rating: Int!
+      body: String!
+    ): Endorsement!
+    updateEndorsement(
+      id: ID!
+      user_id: ID!
+      specialty: String!
+      rating: Int!
+      body: String!
+    ): Endorsement!
     deleteEndorsement(id: ID!): Endorsement!
-
   }
 `;
 
