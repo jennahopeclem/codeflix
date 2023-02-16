@@ -35,6 +35,9 @@ function Signup() {
       });
 
       Auth.login(data.addUser.token);
+        setFormState({
+            name: "",
+        });
     } catch (e) {
       console.error(e);
     }
