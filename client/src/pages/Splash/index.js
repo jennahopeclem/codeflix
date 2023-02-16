@@ -7,7 +7,7 @@ function Splash() {
     <>
     
       
-      <div class="splash" >
+      <div className="splash" >
         
       </div>
       </>
