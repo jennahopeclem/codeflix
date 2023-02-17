@@ -93,10 +93,11 @@ const typeDefs = gql`
     
     updateProject(
       projectId: ID!
-      name: String!
+      name: String
       description: String
       complete: Boolean
       thumbnail: String
+      users: [ID]
     ): Project!
     deleteProject(projectId: ID!): Project!
 
