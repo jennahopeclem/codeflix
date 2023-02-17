@@ -17,6 +17,11 @@ const resolvers = {
     project: async (parent, { projectId }) => {
       return Project.findOne({ _id: projectId }).populate('looking_for');
     },
+    myProject: async (parent, { userId }) => {
+      return Project.findOne(
+        {$match: {'users._id': userId}}
+      );
+    },
     allRecruitments: async () => {
         return Project.find({$unwind: "looking_for"});
     }

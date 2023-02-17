@@ -45,7 +45,7 @@ const projectSchema = new Schema({
     thumbnail: {
       type: String,
       required: false,
-      default: '' // this will be a default thumbnail
+      default: 'https://res.cloudinary.com/dijep6dqz/image/upload/v1676509317/Portfolio-assets/computer_z0o92j.png' // this will be a default thumbnail
     }
   });
 

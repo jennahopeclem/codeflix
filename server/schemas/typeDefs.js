@@ -35,6 +35,7 @@ const typeDefs = gql`
     looking_for: [Recruitment]
     users: [User]!
     complete: Boolean
+    thumbnail: String
   }
 
   type Auth {
@@ -47,6 +48,7 @@ const typeDefs = gql`
     user(userId: ID!): User
     allProjects: [Project]!
     project(projectId: ID!): Project
+    myProject(userId: ID!): Project
     allRecruitments: [Recruitment]!
     recruitment(recruitmentId: ID!): Recruitment
     allEndorsements: [Endorsement]
@@ -88,6 +90,7 @@ const typeDefs = gql`
       description: String
       complete: Boolean
     ): Project!
+    
     updateProject(
       projectId: ID!
       name: String!

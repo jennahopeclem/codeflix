@@ -39,7 +39,7 @@ class AuthService {
 }
     catch(err) {
       console.log('this error is in isExpired', err, err.message);
-      return false;
+      return true;
     }
 
   }

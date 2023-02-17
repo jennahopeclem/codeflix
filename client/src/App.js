@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache, useQuery } from "@apollo/client";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Project from "./pages/Project";
@@ -28,11 +28,13 @@ function App() {
 
   let userId;
   
+  if(Auth.loggedIn()) {
   !Auth.isTokenExpired()
       ? userId = Auth.getProfile().data._id
       : userId = null;
 
       console.log('userId: ', userId)
+  }
 
 
   return (
@@ -43,7 +45,7 @@ function App() {
             <Route path="/" element={page} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} onEnter={() => Auth.logout} />
-            <Route path="/project" element={<Project />} />
+            <Route path="/project" element={<Project userId={userId}/>} />
             <Route path="/profile" element={<Profile userId={userId}/>} />
             <Route path="/splash" element={page} />
             <Route path="/signup" element={<Signup />} />
