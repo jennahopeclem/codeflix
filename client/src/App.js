@@ -26,6 +26,15 @@ function App() {
     setPage(<Home />);
   }
 
+  let userId;
+  
+  !Auth.isTokenExpired()
+      ? userId = Auth.getProfile().data._id
+      : userId = null;
+
+      console.log('userId: ', userId)
+
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -35,7 +44,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} onEnter={() => Auth.logout} />
             <Route path="/project" element={<Project />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile userId={userId}/>} />
             <Route path="/splash" element={page} />
             <Route path="/signup" element={<Signup />} />
           </Routes>

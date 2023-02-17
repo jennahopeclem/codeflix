@@ -31,7 +31,6 @@ function Login() {
   // submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -42,6 +41,7 @@ function Login() {
     } catch (e) {
       console.error(e);
     }
+
 
     // clear form values
     setFormState({
