@@ -3,22 +3,24 @@ import Nav from "../../components/utils/nav";
 import { Carousel, CarouselItem } from "../../components/displays/carousel";
 import Card from "../../components/displays/card";
 import { QUERY_ALL_PROJECTS, QUERY_ALL_USERS } from "../../utils/queries";
-import { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client"
+import Auth from "../../utils/auth";
 
 function Home() {
+  const myUser = Auth.loggedIn()?  Auth.getProfile().data : 'to CODEFLIX';
   // =================  QUERIES  ================================
 
-  // const carouselData = {
-  //   projects: useQuery(QUERY_ALL_PROJECTS, {  // add find incomplete projects
-  //     fetchPolicy: "no-cache"
-  //   }),
-  //   users: useQuery(QUERY_ALL_USERS, { // add find devs looking for work
-  //     fetchPolicy: "no-cache"
-  //   }),
-  //   completedProjects: useQuery(QUERY_ALL_PROJECTS, {  // add find complete projects
-  //     fetchPolicy: "no-cache"
-  //   })
-  // }
+  const carouselData = {
+    projects: useQuery(QUERY_ALL_PROJECTS, {  // add find incomplete projects
+      fetchPolicy: "no-cache"
+    }),
+    users: useQuery(QUERY_ALL_USERS, { // add find devs looking for work
+      fetchPolicy: "no-cache"
+    }),
+    completedProjects: useQuery(QUERY_ALL_PROJECTS, {  // add find complete projects
+      fetchPolicy: "no-cache"
+    })
+  }
 
   // =================  END QUERIES  ================================
 
@@ -27,7 +29,7 @@ function Home() {
       <div>
         <div>
           <h1 className="m-20 mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center">
-            Welcome to Codeflix
+          Welcome {myUser.username? myUser.username : myUser}
           </h1>
         </div>
         <div>
@@ -69,46 +71,24 @@ fetchPolicy: "no-cache",
                                         'mx-2' added to first div class
 */}
       <div>
-        <div className="h-screen">
+        <div className="h-screen">          
+        <h1 className="text-2xl text-white font-semibold text-center">Projects looking for Developers</h1>
           <Carousel className="carousel-item">
             <CarouselItem></CarouselItem>
             <CarouselItem></CarouselItem>
             <CarouselItem></CarouselItem>
           </Carousel>
-
+          <h1 className="text-2xl text-white font-semibold text-center">Developers looking for Projects</h1>
           <Carousel className="carousel-item">
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
-          </Carousel>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
+          </Carousel>          
+          <h1 className="text-2xl text-white font-semibold text-center">Completed projects</h1>
           <Carousel className="carousel-item">
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
-            <CarouselItem>
-              <Card />
-              <Card />
-              <Card />
-            </CarouselItem>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
           </Carousel>
         </div>
       </div>

@@ -73,6 +73,7 @@ query findOneProject($projectId: ID!) {
         description
       }
       users {
+        _id
         username
         profile_pic
         specialty
@@ -80,6 +81,27 @@ query findOneProject($projectId: ID!) {
     }
   }
   `;
+
+  export const QUERY_MY_PROJECT = gql`
+  query myProject($userId: ID!) {
+    myProject(userId: $userId) {
+      _id
+      complete
+      description
+      looking_for {
+        is_looking
+        num_recruits
+        specialty
+        description
+      }
+      name
+      thumbnail
+      users {
+        _id
+      }
+    }
+  }
+    `;
 
 
 

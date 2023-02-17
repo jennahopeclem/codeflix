@@ -2,21 +2,46 @@ import decode from "jwt-decode";
 
 class AuthService {
   getProfile() {
-    return decode(this.getToken());
+    try{    
+      console.log('im in getProfile')
+      return decode(this.getToken());}
+      catch(err) {
+        console.log('this error is in idEsxpired', err, err.message)
+      }
+
   }
 
   loggedIn() {
+    try{
+    console.log('im in loggedIn')
     const token = this.getToken();
     return token && !this.isTokenExpired(token) ? true : false;
+    }catch(err) {
+      console.log('this error is in idEsxpired', err, err.message)
+    }
   }
 
   isTokenExpired(token) {
-    const decoded = decode(token);
-    if (decoded.exp < Date.now() / 1000) {
-      localStorage.removeItem("id_token");
+    console.log('im in isExpired')
+    try{   
+      let decoded;
+      token
+        ? decoded = decode(token)
+        : decoded = false;
+      
+      if(!decoded){
+          return false;
+      }
+      if (decoded.exp < Date.now() / 1000) {
+          localStorage.removeItem("id_token");
+          return true;
+    }
+}
+    catch(err) {
+      console.log('this error is in isExpired', err, err.message);
       return true;
     }
-    return false;
+
   }
 
   getToken() {

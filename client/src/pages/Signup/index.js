@@ -40,6 +40,7 @@ function Signup() {
         });
     } catch (e) {
       console.error(e);
+      window.location.replace('/login');
     }
   };
 

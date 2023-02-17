@@ -29,7 +29,6 @@ function Card() {
   return (
 
     <>
-        <h1 className="text-2xl text-white font-semibold text-center">Projects looking for Developers</h1>
     {mockData.map((mockData) => (
         <div key={mockData.id + 1} className="card max-w-sm w-full lg:max-w-full lg:flex mx-2">
 
