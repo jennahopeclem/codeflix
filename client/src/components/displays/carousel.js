@@ -5,10 +5,10 @@ import Card from "./card";
 
 export const CarouselItem = ({ children, width }) => {
   return (
-    <div className="carousel-item content-center flex flex-row w-full " >
-              <Card />
-              <Card />
-              <Card />
+    <div className="carousel-item content-center flex flex-row w-full ">
+      <Card />
+      <Card />
+      <Card />
     </div>
   );
 };

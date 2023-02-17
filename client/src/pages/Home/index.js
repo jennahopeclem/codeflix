@@ -71,15 +71,9 @@ fetchPolicy: "no-cache",
       <div>
         <div className="h-screen">
           <Carousel className="carousel-item">
-            <CarouselItem>
-
-            </CarouselItem>
-            <CarouselItem>
-
-            </CarouselItem>
-            <CarouselItem>
-
-            </CarouselItem>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
+            <CarouselItem></CarouselItem>
           </Carousel>
 
           <Carousel className="carousel-item">
@@ -118,7 +112,6 @@ fetchPolicy: "no-cache",
           </Carousel>
         </div>
       </div>
-      <div>This is Homepage</div>
       <Nav></Nav>
     </>
   );
